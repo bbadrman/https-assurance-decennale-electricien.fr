@@ -1,5 +1,12 @@
 import React from 'react';
 
+const cardStyles = [
+  { icon: 'fa-euro-sign', bgGradient: 'from-yellow-400 to-yellow-400/80', borderColor: 'border-yellow-200' },
+  { icon: 'fa-shield-alt', bgGradient: 'from-blue-500 to-blue-500/80', borderColor: 'border-blue-200' },
+  { icon: 'fa-user-clock', bgGradient: 'from-green-500 to-green-500/80', borderColor: 'border-green-200' },
+  { icon: 'fa-question-circle', bgGradient: 'from-purple-500 to-purple-500/80', borderColor: 'border-purple-200' }
+];
+
 const Content = ({ content = {} }) => {
   const {
     title = '',
@@ -12,29 +19,53 @@ const Content = ({ content = {} }) => {
   return (
     <section className="py-20 bg-surface">
       <div className="container mx-auto px-4">
-        {title && <h2 className="text-3xl lg:text-4xl font-bold text-dark text-center mb-8">{title}</h2>}
+        {title && (
+          <h2 className="text-3xl lg:text-4xl font-bold text-dark text-center mb-8">
+            {title}
+          </h2>
+        )}
         
         {introduction && (
           <div 
-            className="content-intro text-lg text-gray-700 leading-relaxed text-center max-w-4xl mx-auto mb-12"
+            className="text-lg text-gray-700 leading-relaxed text-center max-w-4xl mx-auto mb-16"
             dangerouslySetInnerHTML={{ __html: introduction }}
           />
         )}
 
-        {sections.map((section, index) => (
-          <div key={index} className="content-block max-w-4xl mx-auto mb-12">
-            {section.title && <h3 className="text-2xl font-bold text-dark mb-4">{section.title}</h3>}
-            <div className="content-text text-gray-700 leading-relaxed space-y-4">
-              {section.content && (
-                <div dangerouslySetInnerHTML={{ __html: section.content }} />
-              )}
-            </div>
-          </div>
-        ))}
+        <div className="max-w-6xl mx-auto space-y-8">
+          {sections.map((section, index) => {
+            const style = cardStyles[index] || cardStyles[0];
+            return (
+              <div 
+                key={index} 
+                className={`bg-white rounded-3xl p-8 shadow-lg border ${style.borderColor} hover:shadow-xl transition-all duration-300`}
+              >
+                <div className="flex items-start space-x-6">
+                  <div className={`p-4 bg-gradient-to-br ${style.bgGradient} rounded-2xl shadow-lg flex-shrink-0`}>
+                    <i className={`fas ${style.icon} text-white text-2xl`}></i>
+                  </div>
+                  <div className="flex-1">
+                    {section.title && (
+                      <h3 className="text-2xl font-bold text-dark mb-4">{section.title}</h3>
+                    )}
+                    <div className="text-gray-700 leading-relaxed space-y-4">
+                      {section.content && (
+                        <div dangerouslySetInnerHTML={{ __html: section.content }} />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
         {ctaText && (
-          <div className="content-cta text-center mt-12">
-            <a href={ctaLink} className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all">
+          <div className="text-center mt-16">
+            <a 
+              href={ctaLink} 
+              className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all transform hover:scale-105"
+            >
               {ctaText}
             </a>
           </div>

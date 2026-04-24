@@ -42,7 +42,7 @@ function Hero({ onSuccess }) {
   };
 
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern relative overflow-hidden">
+    <section id="hero" className="py-20 lg:py-32 bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern relative overflow-hidden">
       <div className="absolute inset-0 scanlines-bg opacity-30"></div>
         <div className="absolute top-10 left-10 floating-animation">
           <i className="fas fa-shield-alt text-yellow-500 text-6xl opacity-30"></i>
@@ -51,9 +51,9 @@ function Hero({ onSuccess }) {
         <i className="fas fa-bolt text-yellow-500 text-8xl opacity-25"></i>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="slide-in-left">
+       <div className="container mx-auto px-4 relative z-10">
+         <div className="grid lg:grid-cols-2 gap-16 items-center">
+           <div className="slide-in-left order-2 lg:order-1">
             <div className="relative">
               <div className="w-full h-[500px] lg:h-[600px] bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl shadow-2xl overflow-hidden">
                 <div className="absolute inset-0 scanlines-bg opacity-20"></div>
@@ -65,9 +65,9 @@ function Hero({ onSuccess }) {
                 <img src="/images/img.png" alt="Assurance Décennale Électricien" className="w-full h-48 object-cover rounded-2xl shadow-lg" />
               </div>
             </div>
-          </div>
+           </div>
 
-          <div className="slide-in-right">
+           <div className="slide-in-right order-1 lg:order-2">
             <div className="bg-surface rounded-3xl shadow-2xl p-8 card-hover border border-gray-100">
               <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-yellow-400 rounded-2xl mx-auto mb-4 flex items-center justify-center">
@@ -99,32 +99,32 @@ function Hero({ onSuccess }) {
                         <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
                         <i className="fas fa-building text-yellow-500"></i>
                       </span>
-                      <input
-                        type="text"
-                        name="entreprise"
-                        value={formData.entreprise}
-                        onChange={handleChange}
-                        placeholder="Entreprise / Nom"
-                        className="flex-1 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                      />
+                       <input
+                         type="text"
+                         name="entreprise"
+                         value={formData.entreprise}
+                         onChange={handleChange}
+                         placeholder="Entreprise / Nom"
+                         className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="form-group">
                       <div className="input-group flex">
                         <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
                           <i className="fas fa-user text-yellow-500"></i>
                         </span>
-                        <input
-                          type="text"
-                          name="nom"
-                          value={formData.nom}
-                          onChange={handleChange}
-                          placeholder="Votre Nom *"
-                          className="flex-1 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                          required
-                        />
+                         <input
+                           type="text"
+                           name="nom"
+                           value={formData.nom}
+                           onChange={handleChange}
+                           placeholder="Votre Nom *"
+                           className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                           required
+                         />
                       </div>
                     </div>
 
@@ -133,13 +133,13 @@ function Hero({ onSuccess }) {
                         <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
                           <i className="fas fa-briefcase text-yellow-500"></i>
                         </span>
-                        <select
-                          name="statut"
-                          value={formData.statut}
-                          onChange={handleChange}
-                          className="flex-1 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                          required
-                        >
+                         <select
+                           name="statut"
+                           value={formData.statut}
+                           onChange={handleChange}
+                           className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                           required
+                         >
                           <option value="">Statut *</option>
                           <option value="auto-entrepreneur">Auto-entrepreneur</option>
                           <option value="ei">Entreprise Individuelle</option>
@@ -151,7 +151,7 @@ function Hero({ onSuccess }) {
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="form-group">
                       <div className="input-group flex">
                         <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
@@ -163,7 +163,7 @@ function Hero({ onSuccess }) {
                           value={formData.tele}
                           onChange={handleChange}
                           placeholder="Téléphone *"
-                          className="flex-1 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                          className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
                           required
                         />
                       </div>
@@ -180,7 +180,7 @@ function Hero({ onSuccess }) {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="Email *"
-                          className="flex-1 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                          className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
                           required
                         />
                       </div>
@@ -196,7 +196,7 @@ function Hero({ onSuccess }) {
                           name="chiffreAffaires"
                           value={formData.chiffreAffaires}
                           onChange={handleChange}
-                          className="flex-1 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                          className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
                         >
                           <option value="">Chiffre d'affaires</option>
                           <option value="0-30k">Moins de 30 000€</option>
