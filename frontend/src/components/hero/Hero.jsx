@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { submitQuote } from '../../services/api';
 
 function Hero({ onSuccess }) {
@@ -19,6 +19,36 @@ function Hero({ onSuccess }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [revealStates, setRevealStates] = useState({});
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setRevealStates((prev) => ({
+              ...prev,
+              [entry.target.dataset.revealId]: true,
+            }));
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      }
+    );
+
+    const revealElements = document.querySelectorAll('[data-reveal]');
+    revealElements.forEach((el) => {
+      if (!el.dataset.revealId) {
+        el.dataset.revealId = Math.random().toString(36).substr(2, 9);
+      }
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,21 +74,42 @@ function Hero({ onSuccess }) {
   return (
     <section id="hero" className="py-20 lg:py-32 bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern relative overflow-hidden">
       <div className="absolute inset-0 scanlines-bg opacity-30"></div>
-        <div className="absolute top-10 left-10 floating-animation">
-          <i className="fas fa-shield-alt text-yellow-500 text-6xl opacity-30"></i>
+      
+      {/* Animated background orbs */}
+      <div className={`bg-orb w-96 h-96 bg-yellow-300 top-20 left-10 transition-all duration-1000 ${revealStates.orb1 ? 'opacity-30 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0s' }} data-reveal data-reveal-id="orb1"></div>
+      <div className={`bg-orb w-80 h-80 bg-blue-300 bottom-20 right-10 transition-all duration-1000 delay-300 ${revealStates.orb2 ? 'opacity-25 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '-5s' }} data-reveal data-reveal-id="orb2"></div>
+      <div className={`bg-orb w-60 h-60 bg-green-300 top-1/2 left-1/3 transition-all duration-1000 delay-500 ${revealStates.orb3 ? 'opacity-20 translate-y-0' : 'opacity-0 -translate-y-10'}`} style={{ animationDelay: '-10s' }} data-reveal data-reveal-id="orb3"></div>
+      
+      {/* Floating decorative elements */}
+      <div className={`absolute top-10 left-10 transition-all duration-1000 delay-200 ${revealStates.deco1 ? 'opacity-30' : 'opacity-0 -translate-x-10'}`}>
+        <div className="w-16 h-16 bg-yellow-400 rounded-2xl shadow-lg flex items-center justify-center floating-animation">
+          <i className="fas fa-shield-alt text-yellow-600 text-2xl"></i>
         </div>
-      <div className="absolute bottom-10 right-10 floating-animation" style={{ animationDelay: '-2s' }}>
-        <i className="fas fa-bolt text-yellow-500 text-8xl opacity-25"></i>
+      </div>
+      <div className={`absolute top-20 right-20 transition-all duration-1000 delay-400 ${revealStates.deco2 ? 'opacity-25' : 'opacity-0 translate-x-10'}`} style={{ animationDelay: '-2s' }}>
+        <div className="w-20 h-20 bg-blue-400 rounded-full shadow-lg flex items-center justify-center floating-animation">
+          <i className="fas fa-bolt text-blue-500 text-2xl"></i>
+        </div>
+      </div>
+      <div className={`absolute bottom-10 left-1/4 transition-all duration-1000 delay-600 ${revealStates.deco3 ? 'opacity-20' : 'opacity-0 translate-x-10'}`} style={{ animationDelay: '-4s' }}>
+        <div className="w-12 h-12 bg-green-400 rounded-lg shadow-lg flex items-center justify-center floating-animation">
+          <i className="fas fa-plug text-green-500 text-lg"></i>
+        </div>
       </div>
 
        <div className="container mx-auto px-4 relative z-10">
          <div className="grid lg:grid-cols-2 gap-16 items-center">
-           <div className="slide-in-left order-2 lg:order-1">
+           <div className="reveal stagger-children">
             <div className="relative">
-              <div className="w-full h-[500px] lg:h-[600px] bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl shadow-2xl overflow-hidden">
+              <div className="w-full h-[500px] lg:h-[600px] bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl shadow-2xl overflow-hidden group">
                 <div className="absolute inset-0 scanlines-bg opacity-20"></div>
+                {/* Rotating glow ring */}
+                <div className="absolute -inset-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 rounded-full border-2 border-yellow-400 glow-ring"></div>
+                  <div className="absolute inset-4 rounded-full border-2 border-yellow-300 glow-ring" style={{ animationDirection: 'reverse' }}></div>
+                </div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <img src="/images/img.png" alt="Assurance Décennale Électricien" className="w-full h-full object-cover" />
+                  <img src="/images/img.png" alt="Assurance Décennale Électricien" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
               </div>
               <div className="lg:hidden mt-6">
@@ -67,7 +118,7 @@ function Hero({ onSuccess }) {
             </div>
            </div>
 
-           <div className="slide-in-right order-1 lg:order-2">
+          <div className="reveal">
             <div className="bg-surface rounded-3xl shadow-2xl p-8 card-hover border border-gray-100">
               <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-yellow-400 rounded-2xl mx-auto mb-4 flex items-center justify-center">
@@ -140,13 +191,13 @@ function Hero({ onSuccess }) {
                            className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
                            required
                          >
-                          <option value="">Statut *</option>
-                          <option value="auto-entrepreneur">Auto-entrepreneur</option>
-                          <option value="ei">Entreprise Individuelle</option>
-                          <option value="eurl">EURL</option>
-                          <option value="sarl">SARL</option>
-                          <option value="sas">SAS</option>
-                        </select>
+                           <option value="">Statut *</option>
+                           <option value="auto-entrepreneur">Auto-entrepreneur</option>
+                           <option value="ei">Entreprise Individuelle</option>
+                           <option value="eurl">EURL</option>
+                           <option value="sarl">SARL</option>
+                           <option value="sas">SAS</option>
+                         </select>
                       </div>
                     </div>
                   </div>
@@ -235,7 +286,7 @@ function Hero({ onSuccess }) {
             </div>
           </div>
         </div>
-      </div>
+       </div>
     </section>
   );
 }

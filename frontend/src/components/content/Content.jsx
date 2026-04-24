@@ -17,17 +17,20 @@ const Content = ({ content = {} }) => {
   } = content;
 
   return (
-    <section className="py-20 bg-surface">
+    <section className="py-20 bg-surface relative overflow-hidden">
+      <div className="bg-orb w-64 h-64 bg-yellow-200 top-10 right-10" style={{ animationDelay: '0s' }}></div>
+      <div className="bg-orb w-48 h-48 bg-blue-200 bottom-10 left-10" style={{ animationDelay: '-7s' }}></div>
+      
       <div className="container mx-auto px-4">
         {title && (
-          <h2 className="text-3xl lg:text-4xl font-bold text-dark text-center mb-8">
+          <h2 className="text-3xl lg:text-4xl font-bold text-dark text-center mb-8 reveal">
             {title}
           </h2>
         )}
-        
+         
         {introduction && (
           <div 
-            className="text-lg text-gray-700 leading-relaxed text-center max-w-4xl mx-auto mb-16"
+            className="text-lg text-gray-700 leading-relaxed text-center max-w-4xl mx-auto mb-16 reveal"
             dangerouslySetInnerHTML={{ __html: introduction }}
           />
         )}
@@ -38,10 +41,11 @@ const Content = ({ content = {} }) => {
             return (
               <div 
                 key={index} 
-                className={`bg-white rounded-3xl p-8 shadow-lg border ${style.borderColor} hover:shadow-xl transition-all duration-300`}
+                className={`bg-white rounded-3xl p-8 shadow-lg border ${style.borderColor} hover:shadow-xl transition-all duration-300 reveal hover-lift`}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="flex items-start space-x-6">
-                  <div className={`p-4 bg-gradient-to-br ${style.bgGradient} rounded-2xl shadow-lg flex-shrink-0`}>
+                  <div className={`p-4 bg-gradient-to-br ${style.bgGradient} rounded-2xl shadow-lg flex-shrink-0 icon-bounce`} style={{ animationDelay: `${index * 0.2}s` }}>
                     <i className={`fas ${style.icon} text-white text-2xl`}></i>
                   </div>
                   <div className="flex-1">
@@ -61,10 +65,10 @@ const Content = ({ content = {} }) => {
         </div>
 
         {ctaText && (
-          <div className="text-center mt-16">
+          <div className="text-center mt-16 reveal">
             <a 
               href={ctaLink} 
-              className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all transform hover:scale-105"
+              className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all transform hover:scale-105 gradient-shine"
             >
               {ctaText}
             </a>
