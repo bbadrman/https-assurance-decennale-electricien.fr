@@ -16,17 +16,28 @@ class LeadController extends AbstractController
     public function createLead(Request $request, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+        
+        // Debug logging
+        error_log('Received data: ' . print_r($data, true));
 
         $lead = new Lead();
         $lead->setNom($data['nom'] ?? null);
+        $lead->setPrenom($data['prenom'] ?? null);
+        $lead->setRaisonSociale($data['raisonSociale'] ?? null);
+        $lead->setDemarrageActivite($data['demarrageActivite'] ?? null);
+        $lead->setActiviteAssuree($data['activiteAssuree'] ?? null);
+        $lead->setAssuranceResilie($data['assuranceResilie'] ?? null);
+        $lead->setMotifResiliation($data['motifResiliation'] ?? null);
+        $lead->setCodePostal($data['codePostal'] ?? null);
         $lead->setEmail($data['email'] ?? null);
         $lead->setTele($data['tele'] ?? null);
-        $lead->setEntreprise($data['entreprise'] ?? null);
-        $lead->setStatut($data['statut'] ?? null);
-        $lead->setChiffreAffaires($data['chiffreAffaires'] ?? null);
 
+        // Debug logging
+        error_log('Before persist - Nom: ' . $lead->getNom() . ', Prenom: ' . $lead->getPrenom() . ', Email: ' . $lead->getEmail());
         $em->persist($lead);
         $em->flush();
+        // Debug logging
+        error_log('After flush - Lead ID: ' . $lead->getId());
 
         return new JsonResponse([
             'success' => true,
@@ -43,11 +54,15 @@ class LeadController extends AbstractController
             return [
                 'id' => $lead->getId(),
                 'nom' => $lead->getNom(),
+                'prenom' => $lead->getPrenom(),
                 'email' => $lead->getEmail(),
                 'tele' => $lead->getTele(),
-                'entreprise' => $lead->getEntreprise(),
-                'statut' => $lead->getStatut(),
-                'chiffreAffaires' => $lead->getChiffreAffaires(),
+                'raisonSociale' => $lead->getRaisonSociale(),
+                'demarrageActivite' => $lead->getDemarrageActivite(),
+                'activiteAssuree' => $lead->getActiviteAssuree(),
+                'assuranceResilie' => $lead->getAssuranceResilie(),
+                'motifResiliation' => $lead->getMotifResiliation(),
+                'codePostal' => $lead->getCodePostal(),
                 'createdAt' => $lead->getCreatedAt()->format('Y-m-d H:i:s')
             ];
         }, $leads);
