@@ -102,7 +102,7 @@ function Hero({ onSuccess }) {
       </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-stretch">
            <div className="reveal order-1 lg:order-2">
              <div className="bg-surface rounded-3xl shadow-2xl p-8 card-hover border border-gray-100">
                <div className="text-center mb-8">
@@ -343,25 +343,29 @@ function Hero({ onSuccess }) {
                )}
              </div>
            </div>
+<div className="reveal order-2 lg:order-1 lg:flex-1">
+  <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl shadow-2xl overflow-hidden h-full min-h-[600px] relative group">
+    
+    {/* scanlines */}
+    <div className="absolute inset-0 scanlines-bg opacity-20"></div>
 
-            <div className="reveal stagger-children order-2 lg:order-1">
-             <div className="relative">
-               <div className="w-full h-[500px] lg:h-[600px] bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl shadow-2xl overflow-hidden group">
-                 <div className="absolute inset-0 scanlines-bg opacity-20"></div>
-                 {/* Rotating glow ring */}
-                 <div className="absolute -inset-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                   <div className="absolute inset-0 rounded-full border-2 border-yellow-400 glow-ring"></div>
-                   <div className="absolute inset-4 rounded-full border-2 border-yellow-300 glow-ring" style={{ animationDirection: 'reverse' }}></div>
-                 </div>
-                 <div className="absolute inset-0 flex items-center justify-center">
-                   <img src="/images/img.png" alt="Assurance Décennale Électricien" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                 </div>
-               </div>
-               <div className="mt-6">
-                 <img src="/images/img.png" alt="Assurance Décennale Électricien" className="w-full h-48 object-cover rounded-2xl shadow-lg" />
-               </div>
-             </div>
-            </div>
+    {/* glow */}
+    <div className="absolute -inset-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+      <div className="absolute inset-0 rounded-full border-2 border-yellow-400 glow-ring"></div>
+      <div
+        className="absolute inset-4 rounded-full border-2 border-yellow-300 glow-ring"
+        style={{ animationDirection: "reverse" }}
+      ></div>
+    </div>
+
+    {/* image */}
+    <img
+      src="/images/img.png"
+      alt="Assurance Décennale Électricien"
+      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+    />
+  </div>
+</div>
           </div>
         </div>
     </section>
