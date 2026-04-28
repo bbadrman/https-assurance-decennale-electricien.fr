@@ -16,9 +16,48 @@ class LeadController extends AbstractController
     public function createLead(Request $request, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        
-        // Debug logging
-        error_log('Received data: ' . print_r($data, true));
+
+        // Validation
+        $errors = [];
+
+        // Always required fields
+        $requiredAlways = ['nom', 'prenom', 'raisonSociale', 'demarrageActivite', 'codePostal', 'email', 'tele'];
+        foreach ($requiredAlways as $field) {
+            if (empty($data[$field])) {
+                $errors[] = "Le champ $field est requis";
+            }
+        }
+
+        // Email validation
+        if (isset($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Email invalide";
+        }
+
+        // Conditional validation: if demarrageActivite = "non", insurance history fields required
+        if (isset($data['demarrageActivite']) && $data['demarrageActivite'] === 'non') {
+            // activiteAssuree and assuranceResilie are always required when demarrageActivite = "non"
+            $conditionalRequired = ['activiteAssuree', 'assuranceResilie'];
+            foreach ($conditionalRequired as $field) {
+                if (empty($data[$field])) {
+                    $errors[] = "Le champ $field est requis";
+                }
+            }
+
+            // Motif résiliation required only if activiteAssuree != "non" AND assuranceResilie = "oui"
+            if (isset($data['activiteAssuree']) && $data['activiteAssuree'] !== 'non' &&
+                isset($data['assuranceResilie']) && $data['assuranceResilie'] === 'oui') {
+                if (empty($data['motifResiliation'])) {
+                    $errors[] = "Le motif de résiliation est requis";
+                }
+            }
+        }
+
+        if (!empty($errors)) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => $errors
+            ], 400);
+        }
 
         $lead = new Lead();
         $lead->setNom($data['nom'] ?? null);
@@ -32,12 +71,8 @@ class LeadController extends AbstractController
         $lead->setEmail($data['email'] ?? null);
         $lead->setTele($data['tele'] ?? null);
 
-        // Debug logging
-        error_log('Before persist - Nom: ' . $lead->getNom() . ', Prenom: ' . $lead->getPrenom() . ', Email: ' . $lead->getEmail());
         $em->persist($lead);
         $em->flush();
-        // Debug logging
-        error_log('After flush - Lead ID: ' . $lead->getId());
 
         return new JsonResponse([
             'success' => true,
