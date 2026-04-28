@@ -23,16 +23,20 @@ function Home() {
     };
 
     const observeReveal = () => {
-      document.querySelectorAll('.reveal:not([data-reveal-observed])').forEach((el) => {
-        el.setAttribute('data-reveal-observed', 'true');
-        io.observe(el);
-        if (isInViewport(el)) {
-          el.classList.add('reveal-visible');
+      document.querySelectorAll('.reveal').forEach((el) => {
+        if (!el.dataset.revealObserved) {
+          el.dataset.revealObserved = 'true';
+          io.observe(el);
+          if (isInViewport(el)) {
+            el.classList.add('reveal-visible');
+          }
         }
       });
     };
 
-    observeReveal();
+    // Initial observation after a short delay to ensure DOM is ready
+    setTimeout(observeReveal, 100);
+    
     const mo = new MutationObserver(observeReveal);
     mo.observe(document.body, { childList: true, subtree: true });
 
