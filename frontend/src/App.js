@@ -6,6 +6,7 @@ import CookieBanner from './components/CookieBanner';
 import Home from './pages/Home';
 import MentionsLegales from './pages/MentionsLegales';
 import PolitiqueConfidentialite from './pages/PolitiqueConfidentialite';
+import Response from './pages/Response';
 import './index.css';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/mentions-legales" element={<MentionsLegales />} />
             <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+            <Route path="/response" element={<Response />} />
             <Route path="*" element={<div className="p-8 text-center">Page not found</div>} />
           </Routes>
         </main>

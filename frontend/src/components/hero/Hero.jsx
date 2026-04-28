@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { submitQuote } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 function Hero({ onSuccess }) {
+  const navigate = useNavigate();
   const handleSubmitSuccess = () => {
     if (onSuccess) {
       onSuccess();
     }
+    // Redirect to response page on success
+    navigate('/response');
   };
 
   const [formData, setFormData] = useState({
@@ -20,10 +24,16 @@ function Hero({ onSuccess }) {
     email: '',
     tele: ''
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
-  const [revealStates, setRevealStates] = useState({});
+   const [loading, setLoading] = useState(false);
+   const [error, setError] = useState(null);
+   const [revealStates, setRevealStates] = useState({});
+
+  // Conditional logic for field visibility
+  const hideAll = formData.demarrageActivite === "oui";
+  const showMotifResiliation =
+    !hideAll &&
+    formData.activiteAssuree !== "non" &&
+    formData.assuranceResilie !== "non";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,21 +69,20 @@ function Hero({ onSuccess }) {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+   const handleSubmit = async (e) => {
+     e.preventDefault();
+     setLoading(true);
+     setError(null);
 
-    try {
-      await submitQuote(formData);
-      setSuccess(true);
-      handleSubmitSuccess();
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+     try {
+       await submitQuote(formData);
+       handleSubmitSuccess();
+     } catch (err) {
+       setError(err.message);
+     } finally {
+       setLoading(false);
+     }
+   };
 
   return (
     <section id="hero" className="py-20 lg:py-32 bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern relative overflow-hidden">
@@ -113,16 +122,7 @@ function Hero({ onSuccess }) {
                  <div className="w-20 h-1 bg-yellow-400 mx-auto rounded-full"></div>
                </div>
 
-               {success ? (
-                 <div className="text-center py-8">
-                   <div className="w-16 h-16 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
-                     <i className="fas fa-check text-white text-2xl"></i>
-                   </div>
-                   <h2 className="text-2xl font-bold text-dark mb-2">Merci !</h2>
-                   <p className="text-gray-600">Votre demande a été envoyée. Un expert vous contactera rapidement.</p>
-                 </div>
-               ) : (
-                  <form id="contactForm" onSubmit={handleSubmit} className="space-y-6">
+                <form id="contactForm" onSubmit={handleSubmit} className="space-y-6">
                     {error && (
                       <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
                         {error}
@@ -206,17 +206,17 @@ function Hero({ onSuccess }) {
                             <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
                               <i className="fas fa-shield-alt text-yellow-500"></i>
                             </span>
-                            <select
-                              name="activiteAssuree"
-                              value={formData.activiteAssuree}
-                              onChange={handleChange}
-                              className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
-                            >
-                              <option value="">Activité assurée actuellement</option>
-                              <option value="oui">Oui</option>
-                              <option value="non">Non</option>
-                            </select>
+                          <select
+                            name="activiteAssuree"
+                            value={formData.activiteAssuree}
+                            onChange={handleChange}
+                            className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                            required={!hideAll}
+                          >
+                            <option value="">Activité assurée actuellement</option>
+                            <option value="oui">Oui</option>
+                            <option value="non">Non</option>
+                          </select>
                           </div>
                         </div>
                       </div>
@@ -227,21 +227,21 @@ function Hero({ onSuccess }) {
                             <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
                               <i className="fas fa-ban text-yellow-500"></i>
                             </span>
-                            <select
-                              name="assuranceResilie"
-                              value={formData.assuranceResilie}
-                              onChange={handleChange}
-                              className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
-                            >
-                              <option value="">Assurance résilié</option>
-                              <option value="oui">Oui</option>
-                              <option value="non">Non</option>
-                            </select>
+                          <select
+                            name="assuranceResilie"
+                            value={formData.assuranceResilie}
+                            onChange={handleChange}
+                            className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                            required={!hideAll}
+                          >
+                            <option value="">Assurance résilié</option>
+                            <option value="oui">Oui</option>
+                            <option value="non">Non</option>
+                          </select>
                           </div>
                         </div>
 
-                        <div className="form-group">
+                        {showMotifResiliation && (<div className="form-group">
                           <div className="input-group flex">
                             <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
                               <i className="fas fa-exclamation-triangle text-yellow-500"></i>
@@ -251,7 +251,7 @@ function Hero({ onSuccess }) {
                               value={formData.motifResiliation}
                               onChange={handleChange}
                               className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
+                              required={showMotifResiliation}
                             >
                               <option value="">Motif résiliation</option>
                               <option value="echeance">Échéance</option>
@@ -260,7 +260,7 @@ function Hero({ onSuccess }) {
                               <option value="amiable">Amiable</option>
                             </select>
                           </div>
-                        </div>
+                        </div>)}
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -276,7 +276,7 @@ function Hero({ onSuccess }) {
                               onChange={handleChange}
                               placeholder="Code Postal..."
                               className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
+                              required={!hideAll}
                             />
                           </div>
                         </div>
@@ -293,7 +293,7 @@ function Hero({ onSuccess }) {
                               onChange={handleChange}
                               placeholder="Email..."
                               className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
+                              required={!hideAll}
                             />
                           </div>
                         </div>
@@ -340,7 +340,7 @@ function Hero({ onSuccess }) {
                       </button>
                     </div>
                   </form>
-               )}
+            
              </div>
            </div>
 <div className="reveal order-2 lg:order-1 lg:flex-1">

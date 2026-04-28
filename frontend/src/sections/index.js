@@ -1,2 +1,0 @@
-export { default as SectionRegistry, getSectionConfig, getSectionLabel, getSectionIcon, getDefaultContent, getAllSectionTypes, validateSectionContent } from './registry';
-export { default as SectionRenderer } from './SectionRenderer';

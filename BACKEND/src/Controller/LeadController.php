@@ -45,28 +45,7 @@ class LeadController extends AbstractController
         ], 201);
     }
 
-    #[Route('/leads', name: 'lead_list', methods: ['GET'])]
-    public function listLeads(EntityManagerInterface $em): JsonResponse
-    {
-        $leads = $em->getRepository(Lead::class)->findBy([], ['createdAt' => 'DESC']);
+    // Lead list endpoint removed to protect lead privacy
+    // Admin interface not included in this streamlined version
 
-        $data = array_map(function ($lead) {
-            return [
-                'id' => $lead->getId(),
-                'nom' => $lead->getNom(),
-                'prenom' => $lead->getPrenom(),
-                'email' => $lead->getEmail(),
-                'tele' => $lead->getTele(),
-                'raisonSociale' => $lead->getRaisonSociale(),
-                'demarrageActivite' => $lead->getDemarrageActivite(),
-                'activiteAssuree' => $lead->getActiviteAssuree(),
-                'assuranceResilie' => $lead->getAssuranceResilie(),
-                'motifResiliation' => $lead->getMotifResiliation(),
-                'codePostal' => $lead->getCodePostal(),
-                'createdAt' => $lead->getCreatedAt()->format('Y-m-d H:i:s')
-            ];
-        }, $leads);
-
-        return new JsonResponse($data);
-    }
 }
