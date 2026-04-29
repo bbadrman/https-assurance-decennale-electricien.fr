@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { submitQuote } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 function Hero({ onSuccess }) {
+  const navigate = useNavigate();
   const handleSubmitSuccess = () => {
     if (onSuccess) {
       onSuccess();
     }
+    // Redirect to response page on success
+    navigate('/response');
   };
 
   const [formData, setFormData] = useState({
@@ -22,8 +26,14 @@ function Hero({ onSuccess }) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
   const [revealStates, setRevealStates] = useState({});
+
+  // Conditional logic for field visibility
+  const hideAll = formData.demarrageActivite === "oui";
+  const showMotifResiliation =
+    !hideAll &&
+    formData.activiteAssuree !== "non" &&
+    formData.assuranceResilie !== "non";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -56,7 +66,18 @@ function Hero({ onSuccess }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => {
+      const newState = { ...prev, [name]: value };
+
+      // If demarrageActivite is "oui", clear conditional fields
+      if (name === 'demarrageActivite' && value === 'oui') {
+        newState.activiteAssuree = '';
+        newState.assuranceResilie = '';
+        newState.motifResiliation = '';
+      }
+
+      return newState;
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -66,10 +87,9 @@ function Hero({ onSuccess }) {
 
     try {
       await submitQuote(formData);
-      setSuccess(true);
       handleSubmitSuccess();
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Erreur lors de l\'envoi du formulaire');
     } finally {
       setLoading(false);
     }
@@ -78,12 +98,12 @@ function Hero({ onSuccess }) {
   return (
     <section id="hero" className="py-20 lg:py-32 bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern relative overflow-hidden">
       <div className="absolute inset-0 scanlines-bg opacity-30"></div>
-      
+
       {/* Animated background orbs */}
       <div className={`bg-orb w-96 h-96 bg-yellow-300 top-20 left-10 transition-all duration-1000 ${revealStates.orb1 ? 'opacity-30 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '0s' }} data-reveal data-reveal-id="orb1"></div>
       <div className={`bg-orb w-80 h-80 bg-blue-300 bottom-20 right-10 transition-all duration-1000 delay-300 ${revealStates.orb2 ? 'opacity-25 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ animationDelay: '-5s' }} data-reveal data-reveal-id="orb2"></div>
       <div className={`bg-orb w-60 h-60 bg-green-300 top-1/2 left-1/3 transition-all duration-1000 delay-500 ${revealStates.orb3 ? 'opacity-20 translate-y-0' : 'opacity-0 -translate-y-10'}`} style={{ animationDelay: '-10s' }} data-reveal data-reveal-id="orb3"></div>
-      
+
       {/* Floating decorative elements */}
       <div className={`absolute top-10 left-10 transition-all duration-1000 delay-200 ${revealStates.deco1 ? 'opacity-30' : 'opacity-0 -translate-x-10'}`}>
         <div className="w-16 h-16 bg-yellow-400 rounded-2xl shadow-lg flex items-center justify-center floating-animation">
@@ -104,32 +124,24 @@ function Hero({ onSuccess }) {
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-stretch">
            <div className="reveal order-1 lg:order-2">
-             <div className="bg-surface rounded-3xl shadow-2xl p-8 card-hover border border-gray-100">
-               <div className="text-center mb-8">
-                 <div className="w-16 h-16 bg-yellow-400 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                   <i className="fas fa-calculator text-2xl text-dark"></i>
-                 </div>
-                 <h2 className="text-3xl font-bold text-gradient mb-4">Complétez ce formulaire pour obtenir un tarif</h2>
-                 <div className="w-20 h-1 bg-yellow-400 mx-auto rounded-full"></div>
-               </div>
+              <div className="bg-surface rounded-3xl shadow-2xl p-8 card-hover border border-gray-100">
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 bg-yellow-400 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                    <i className="fas fa-calculator text-2xl text-dark"></i>
+                  </div>
+                  <h2 className="text-3xl lg:text-4xl font-bold text-gradient mb-4">Complétez ce formulaire pour obtenir un tarif</h2>
+                  <div className="w-20 h-1 bg-yellow-400 mx-auto rounded-full"></div>
+                </div>
 
-               {success ? (
-                 <div className="text-center py-8">
-                   <div className="w-16 h-16 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
-                     <i className="fas fa-check text-white text-2xl"></i>
-                   </div>
-                   <h2 className="text-2xl font-bold text-dark mb-2">Merci !</h2>
-                   <p className="text-gray-600">Votre demande a été envoyée. Un expert vous contactera rapidement.</p>
-                 </div>
-               ) : (
-                  <form id="contactForm" onSubmit={handleSubmit} className="space-y-6">
-                    {error && (
-                      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                        {error}
-                      </div>
-                    )}
+                <form id="contactForm" onSubmit={handleSubmit} className="space-y-6">
+                     {error && (
+                       <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-2xl">
+                         {error}
+                       </div>
+                     )}
 
                     <div className="space-y-6">
+                      {/* Always required fields */}
                       <div className="form-group">
                         <div className="input-group flex">
                           <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
@@ -181,88 +193,95 @@ function Hero({ onSuccess }) {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="form-group">
-                          <div className="input-group flex">
-                            <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
-                              <i className="fas fa-calendar-check text-yellow-500"></i>
-                            </span>
-                            <select
-                              name="demarrageActivite"
-                              value={formData.demarrageActivite}
-                              onChange={handleChange}
-                              className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
-                            >
-                              <option value="">Démarrage d'activité</option>
-                              <option value="oui">Oui</option>
-                              <option value="non">Non</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div className="form-group">
-                          <div className="input-group flex">
-                            <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
-                              <i className="fas fa-shield-alt text-yellow-500"></i>
-                            </span>
-                            <select
-                              name="activiteAssuree"
-                              value={formData.activiteAssuree}
-                              onChange={handleChange}
-                              className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
-                            >
-                              <option value="">Activité assurée actuellement</option>
-                              <option value="oui">Oui</option>
-                              <option value="non">Non</option>
-                            </select>
-                          </div>
+                      <div className="form-group">
+                        <div className="input-group flex">
+                          <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                            <i className="fas fa-calendar-check text-yellow-500"></i>
+                          </span>
+                          <select
+                            name="demarrageActivite"
+                            value={formData.demarrageActivite}
+                            onChange={handleChange}
+                            className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                            required
+                          >
+                            <option value="">Démarrage d'activité</option>
+                            <option value="oui">Oui</option>
+                            <option value="non">Non</option>
+                          </select>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="form-group">
-                          <div className="input-group flex">
-                            <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
-                              <i className="fas fa-ban text-yellow-500"></i>
-                            </span>
-                            <select
-                              name="assuranceResilie"
-                              value={formData.assuranceResilie}
-                              onChange={handleChange}
-                              className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
-                            >
-                              <option value="">Assurance résilié</option>
-                              <option value="oui">Oui</option>
-                              <option value="non">Non</option>
-                            </select>
-                          </div>
-                        </div>
+                      {/* Conditional insurance history fields - only when demarrageActivite = "non" */}
+                      {!hideAll && (
+                        <>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="form-group">
+                              <div className="input-group flex">
+                                <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                  <i className="fas fa-shield-alt text-yellow-500"></i>
+                                </span>
+                                <select
+                                  name="activiteAssuree"
+                                  value={formData.activiteAssuree}
+                                  onChange={handleChange}
+                                  className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                                  required
+                                >
+                                  <option value="">Activité assurée actuellement</option>
+                                  <option value="oui">Oui</option>
+                                  <option value="non">Non</option>
+                                </select>
+                              </div>
+                            </div>
 
-                        <div className="form-group">
-                          <div className="input-group flex">
-                            <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
-                              <i className="fas fa-exclamation-triangle text-yellow-500"></i>
-                            </span>
-                            <select
-                              name="motifResiliation"
-                              value={formData.motifResiliation}
-                              onChange={handleChange}
-                              className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
-                              required
-                            >
-                              <option value="">Motif résiliation</option>
-                              <option value="echeance">Échéance</option>
-                              <option value="sinister">Sinister</option>
-                              <option value="non_paiement">Non paiement</option>
-                              <option value="amiable">Amiable</option>
-                            </select>
+                            <div className="form-group">
+                              <div className="input-group flex">
+                                <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                  <i className="fas fa-ban text-yellow-500"></i>
+                                </span>
+                                <select
+                                  name="assuranceResilie"
+                                  value={formData.assuranceResilie}
+                                  onChange={handleChange}
+                                  className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                                  required
+                                >
+                                  <option value="">Assurance résilié</option>
+                                  <option value="oui">Oui</option>
+                                  <option value="non">Non</option>
+                                </select>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
 
+                          {/* Motif résiliation - only if assuranceResilie = "oui" */}
+                          {showMotifResiliation && (
+                            <div className="form-group">
+                              <div className="input-group flex">
+                                <span className="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                  <i className="fas fa-exclamation-triangle text-yellow-500"></i>
+                                </span>
+                                <select
+                                  name="motifResiliation"
+                                  value={formData.motifResiliation}
+                                  onChange={handleChange}
+                                  className="flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input"
+                                  required
+                                >
+                                  <option value="">Motif résiliation</option>
+                                  <option value="echeance">Échéance</option>
+                                  <option value="sinister">Sinister</option>
+                                  <option value="non_paiement">Non paiement</option>
+                                  <option value="amiable">Amiable</option>
+                                </select>
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      )}
+
+                      {/* Always required fields */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-group">
                           <div className="input-group flex">
@@ -323,11 +342,11 @@ function Hero({ onSuccess }) {
                         </span>
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="btn-modern w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl pulse-animation"
-                      >
+                        <button
+                          type="submit"
+                          disabled={loading}
+                          className="btn-modern w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-2xl pulse-animation gradient-shine"
+                        >
                         {loading ? (
                           <>
                             <i className="fas fa-spinner fa-spin mr-2"></i>Traitement en cours...
@@ -339,13 +358,13 @@ function Hero({ onSuccess }) {
                         )}
                       </button>
                     </div>
-                  </form>
-               )}
-             </div>
-           </div>
+                </form>
+
+              </div>
+            </div>
 <div className="reveal order-2 lg:order-1 lg:flex-1">
   <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl shadow-2xl overflow-hidden h-full min-h-[600px] relative group">
-    
+
     {/* scanlines */}
     <div className="absolute inset-0 scanlines-bg opacity-20"></div>
 

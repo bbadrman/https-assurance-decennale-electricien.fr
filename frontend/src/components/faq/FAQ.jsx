@@ -25,7 +25,7 @@ function FAQ({ content = {} }) {
             {items.map((item, index) => (
               <div 
                 key={index} 
-                className="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300 reveal hover-lift"
+                className="border border-gray-200 rounded-3xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300 reveal hover-lift"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <button

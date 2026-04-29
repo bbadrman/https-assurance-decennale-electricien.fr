@@ -21,10 +21,10 @@ function CTA({ content }) {
           <p className="text-xl text-dark/80 mb-8 max-w-2xl mx-auto">{description}</p>
         </div>
         <div className="reveal" style={{ animationDelay: '0.2s' }}>
-          <a 
-            href={buttonLink} 
-            className="inline-block bg-dark text-yellow-400 font-bold py-4 px-10 rounded-2xl hover:bg-primary transition-all transform hover:scale-105 shadow-2xl hover-lift gradient-shine"
-          >
+         <a 
+           href={buttonLink} 
+           className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-10 rounded-2xl hover:shadow-lg transition-all transform hover:scale-105 gradient-shine"
+         >
             {buttonText}
           </a>
         </div>
