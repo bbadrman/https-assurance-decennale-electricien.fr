@@ -22,21 +22,6 @@
             "src/Repository/.gitignore"
         ]
     },
-<<<<<<< HEAD
-    "doctrine/doctrine-fixtures-bundle": {
-        "version": "4.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "3.0",
-            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
-        },
-        "files": [
-            "src/DataFixtures/AppFixtures.php"
-        ]
-    },
-=======
->>>>>>> d94e20d84ccf633d4a2b62929d4bbdb750bfd1e8
     "doctrine/doctrine-migrations-bundle": {
         "version": "4.0",
         "recipe": {
