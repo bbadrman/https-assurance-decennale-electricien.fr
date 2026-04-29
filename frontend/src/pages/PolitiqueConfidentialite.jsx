@@ -4,21 +4,37 @@ import { Link } from 'react-router-dom';
 function PolitiqueConfidentialite() {
   return (
     <>
-      <section className="py-8 lg:py-6 bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern relative overflow-hidden">
+      <section className="py-20 lg:py-32 bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern relative overflow-hidden">
         <div className="absolute inset-0 scanlines-bg opacity-30"></div>
-        <div className="absolute top-5 left-5 floating-animation">
-          <i className="fas fa-shield-alt text-yellow-600 text-4xl opacity-30"></i>
+
+        {/* Animated background orbs */}
+        <div className="bg-orb w-96 h-96 bg-yellow-300 top-20 left-10 transition-all duration-1000 opacity-30 translate-y-0" style={{ animationDelay: '0s' }}></div>
+        <div className="bg-orb w-80 h-80 bg-blue-300 bottom-20 right-10 transition-all duration-1000 delay-300 opacity-25 translate-y-0" style={{ animationDelay: '-5s' }}></div>
+        <div className="bg-orb w-60 h-60 bg-green-300 top-1/2 left-1/3 transition-all duration-1000 delay-500 opacity-20 translate-y-0" style={{ animationDelay: '-10s' }}></div>
+
+        {/* Floating decorative elements */}
+        <div className="absolute top-10 left-10 transition-all duration-1000 delay-200 opacity-30">
+          <div className="w-16 h-16 bg-yellow-400 rounded-2xl shadow-lg flex items-center justify-center floating-animation">
+            <i className="fas fa-shield-alt text-yellow-600 text-2xl"></i>
+          </div>
         </div>
-        <div className="absolute bottom-5 right-5 floating-animation" style={{ animationDelay: '-2s' }}>
-          <i className="fas fa-user-secret text-yellow-700 text-5xl opacity-25"></i>
+        <div className="absolute top-20 right-20 transition-all duration-1000 delay-400 opacity-25" style={{ animationDelay: '-2s' }}>
+          <div className="w-20 h-20 bg-blue-400 rounded-full shadow-lg flex items-center justify-center floating-animation">
+            <i className="fas fa-user-secret text-blue-500 text-2xl"></i>
+          </div>
+        </div>
+        <div className="absolute bottom-10 left-1/4 transition-all duration-1000 delay-600 opacity-20" style={{ animationDelay: '-4s' }}>
+          <div className="w-12 h-12 bg-green-400 rounded-lg shadow-lg flex items-center justify-center floating-animation">
+            <i className="fas fa-key text-green-500 text-lg"></i>
+          </div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center">
-            <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+            <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-2xl mx-auto mb-6 flex items-center justify-center">
               <i className="fas fa-shield-alt text-2xl text-dark"></i>
             </div>
-            <h1 className="text-4xl lg:text-3xl font-bold text-gradient mb-4">Politique de confidentialité</h1>
+            <h1 className="text-4xl lg:text-5xl font-bold text-gradient mb-4">Politique de confidentialité</h1>
             <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-500 mx-auto rounded-full"></div>
           </div>
         </div>
@@ -26,24 +42,24 @@ function PolitiqueConfidentialite() {
 
       <section className="py-20 bg-surface">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-xl shadow-xl p-8 space-y-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 space-y-6">
               <div>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   Ce document explique, de façon claire et transparente, comment nous utilisons et traitons vos données personnelles, pour que vous puissiez comprendre facilement notre démarche. De plus, nous vous indiquons comment nous contacter si vous avez des questions sur vos données personnelles, et nous serions d'ailleurs heureux de pouvoir vous éclairer. Veuillez également lire nos Informations sur les cookies qui détaillent comment Aksam Assurances utilise les cookies et d'autres technologies similaires.
                 </p>
               </div>
 
-              <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">Identité du responsable de traitement</h2>
-                <p className="text-gray-700 leading-relaxed text-justify">
+               <div>
+                 <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Identité du responsable de traitement</h2>
+                 <p className="text-gray-700 leading-relaxed text-justify">
                   Le responsable des traitements des données des utilisateurs collectées via le SITE est la Société AKSAM Assurances SARL, au capital de 10 000,00 euros, immatriculée au RCS de Paris sous le n°840 653 463, dont le siège social 10 Rue de Penthièvre 75008 Paris. France (Cf. mention légales).
                 </p>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">Quels types de données personnelles sont recueillis par AKSAM ASSURANCES ?</h2>
-                <h3 className="text-xl font-semibold text-dark mb-3">Collecte & traitement des données</h3>
+                <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Quels types de données personnelles sont recueillis par AKSAM ASSURANCES ?</h2>
+                <h3 className="text-xl lg:text-2xl font-semibold text-dark mb-3">Collecte & traitement des données</h3>
                 <h4 className="text-lg font-semibold text-dark mb-3">Données personnelles que vous nous donnez</h4>
                 <p className="text-gray-700 leading-relaxed text-justify mb-3">
                   Dans le cadre de l'exploitation de notre SITE, nous sommes susceptibles de collecter des données à caractère personnel vous concernant. Vos données sont traitées conformément aux finalités prévues lors de la collecte. En particulier, nous collectons les données que vous acceptez de nous communiquer :
@@ -83,9 +99,9 @@ function PolitiqueConfidentialite() {
                 </p>
               </div>
 
-              <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">Pourquoi AKSAM ASSURANCES recueille et utilise vos données personnelles ?</h2>
-                <h3 className="text-xl font-semibold text-dark mb-3">Finalités des traitements</h3>
+               <div>
+                 <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Pourquoi AKSAM ASSURANCES recueille et utilise vos données personnelles ?</h2>
+                 <h3 className="text-xl lg:text-2xl font-semibold text-dark mb-3">Finalités des traitements</h3>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   Vos différentes données sont collectées pour assurer :
                 </p>
@@ -105,22 +121,22 @@ function PolitiqueConfidentialite() {
                 </p>
               </div>
 
-              <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">Comment AKSAM ASSURANCES traite vos données personnelles ?</h2>
+               <div>
+                 <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Comment AKSAM ASSURANCES traite vos données personnelles ?</h2>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   AKSAM ASSURANCES récupère vos principales données pour les envoyer à la compagnie d'assurance la plus adapté à vos besoins de tarification. Les destinataires de vos données personnelles sont nos partenaires : en principe les compagnies d'assurance, toute autre personne intervenant au contrat ou dans la gestion d'un sinistre en France.
                 </p>
               </div>
 
-              <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">OÙ stockons-nous vos données personnelles ?</h2>
+               <div>
+                 <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">OÙ stockons-nous vos données personnelles ?</h2>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   Vos données personnelles sont stockées dans nos bases de données stockées sur des serveurs situés au ETATS UNIS.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">Vos données personnelles sont –elles conservés ?</h2>
+                <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Vos données personnelles sont –elles conservés ?</h2>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   Nous avons pour objectif de toujours conserver vos données personnelles de la manière la plus sûre et la plus sécurisée, et uniquement pendant la durée nécessaire à la réalisation de la finalité poursuivie par le traitement des données nécessaires pour la réalisation et le suivi de vos contrats. Ainsi, le tableau ci-après illustre un aperçu général sur la durée de vie (légale) des principaux documents :
                 </p>
@@ -150,19 +166,19 @@ function PolitiqueConfidentialite() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">Quelles sont les procédures de sécurité mises en place par AKSAM ASSURANCES pour protéger vos données personnelles ?</h2>
-                <h3 className="text-xl font-semibold text-dark mb-3">Sécurité</h3>
+                <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Quelles sont les procédures de sécurité mises en place par AKSAM ASSURANCES pour protéger vos données personnelles ?</h2>
+                <h3 className="text-xl lg:text-2xl font-semibold text-dark mb-3">Sécurité</h3>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   Nous respectons la loi Informatique et libertés en matière de sécurité et de confidentialité de vos données, ainsi que selon les nouvelles obligations du règlement général de la protection des données à caractère professionnel (RGPD). A ce titre, nous prenons les précautions utiles, au regard de la nature de vos données et des risques présentés par notre traitement, pour préserver la sécurité des données et, notamment, empêcher qu'elles soient déformées, endommagées, ou que des tiers non autorisés y aient accès (protection physique des locaux, procédé d'authentification de nos conseillers avec accès personnel et sécurisé via des identifiants et mots de passe confidentiels, journalisation des connexions, chiffrement de certaines données,…). En outre, toutes les données que vous nous communiquées via les formulaires en ligne sont cryptées grâce au certificat dont nous bénéficions. Vous pouvez également vous opposer, pour des motifs légitimes, à ce que des données à caractère personnel vous concernant fassent l'objet du traitement que nous mettons en œuvre. Ces droits peuvent être exercés, par simple demande par courrier électronique à l'adresse dédiée contact@aksam-assurances.fr ou par courrier papier à l'adresse : AKSAM Assurances – 10 Rue de Penthièvre 75008 PARIS, ou par téléphone au 01 82 83 48 00 en justifiant de votre identité et d'un motif légitime lorsque celui-ci est exigé par la loi.
                 </p>
               </div>
 
-              <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">Comment sont utilisés les cookies ?</h2>
+               <div>
+                 <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Comment sont utilisés les cookies ?</h2>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   Les cookies sont utilisés dans différents buts. Ils permettent de vous identifier en tant qu'utilisateur unique lorsque vous naviguez sur plusieurs pages d'un site Internet.
                 </p>
-                <h3 className="text-xl font-semibold text-dark mb-3 mt-4">Les cookies de tiers</h3>
+                <h3 className="text-xl lg:text-2xl font-semibold text-dark mb-3 mt-4">Les cookies de tiers</h3>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   Google Analytics : Le site utilise le service Google Analytics, fournit par Google Inc («Google»), qui permet d'analyser le site. Les données générées par ces cookies concernent :
                 </p>
@@ -176,30 +192,25 @@ function PolitiqueConfidentialite() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-dark mb-4">Puis-je contrôler les informations personnelles que j'ai partagées avec Aksam ASSURANCES ?</h2>
-                <h3 className="text-xl font-semibold text-dark mb-3">Vos droits</h3>
+                <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Puis-je contrôler les informations personnelles que j'ai partagées avec Aksam ASSURANCES ?</h2>
+                <h3 className="text-xl lg:text-2xl font-semibold text-dark mb-3">Vos droits</h3>
                 <p className="text-gray-700 leading-relaxed text-justify">
                   Il est rappelé que, conformément aux dispositions de la loi n°78-17 dite « Informatique et Libertés » du 6 janvier 1978 telle que modifiée par la loi du 6 août 2004, ainsi que le règlement n° 2016/679, dit règlement général sur la protection des données (RGPD), constitue le texte de référence européen en matière de protection des données à caractère personnel : vous disposez d'un droit d'accès, de rectification, de mise à jour, de verrouillage ou d'effacement des données à caractère personnel vous concernant, qui sont inexactes, incomplètes, équivoques, périmées, ou dont la collecte, l'utilisation, la communication ou la conservation est interdite. Vous pouvez également vous opposer, pour des motifs légitimes, à ce que des données à caractère personnel vous concernant fassent l'objet du traitement que nous mettons en œuvre. Ces droits peuvent être exercés, par simple demande par courrier électronique à l'adresse dédiée contact@aksam-assurances.fr ou par courrier papier à l'adresse : Aksam ASSURANCES – 10 rue de Penthièvre 75008 PARIS, France, en justifiant de votre identité et d'un motif légitime lorsque celui-ci est exigé par la loi. Il est rappelé que AKSAM ASSURANCES dispose d'un délai légal de 2 mois pour répondre à votre demande. Cependant, nous mettons tout en œuvre pour respecter un délai maximum de 15 jours ouvrés suite à la réception de votre demande. Conformément à la loi 2014-344 du 17 mars 2014 relative à la consommation, vous disposez également d'un droit d'opposition au démarchage téléphonique en vous inscrivant gratuitement sur la liste d'opposition Bloctel. Toutefois, il est rappelé que dans le cadre de l'utilisation de nos services, le fait de remplir une demande de devis sur notre site vaut consentement libre et non équivoque, et le dispositif Bloctel ne pourra s'appliquer. Le responsable du traitement est la société AKSAM ASSURANCES, immatriculée au RCS de PARIS sous le numéro 840 653 463. Pour rappel, le traitement mis en œuvre repose sur plusieurs fonctionnalités ayant pour finalités la mise à disposition d'offres personnalisées d'assurances, le comparatif de ces offres, l'analyse et le reporting de statistiques anonymes. AKSAM ASSURANCES dispose d'une plateforme téléphonique nommé AKSAM ASSURANCES et qui est situé en dehors de l'UE. La succursale se compose de plusieurs services et d'un personnel hautement qualifié. Elle se compose d'un service commercial, d'un service de gestion, d'un service qualité et d'une cellule informatique qui assure la protection de nos serveurs ainsi que de vos données. Nous vous informons que cette politique de protection des données personnelles peut être modifiée par notre délégué de protection des données. Dans ce cas, ces modifications seront consultables sur cette page.
                 </p>
               </div>
 
-              <div className="mt-12 text-center">
-                <Link to="/" className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all">
-                  <i className="fas fa-arrow-left mr-2"></i>
-                  Retour à l'accueil
-                </Link>
-              </div>
+          
 
-              <div className="mt-16 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl p-8 text-center border border-yellow-200">
-                <h3 className="text-2xl font-bold text-dark mb-4">Retour à l'accueil</h3>
-                <p className="text-gray-700 leading-relaxed mb-6">
-                  Découvrez nos offres d'assurance professionnelle et obtenez votre devis personnalisé en quelques clics.
-                </p>
-                <Link to="/" className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all">
-                  <i className="fas fa-arrow-left mr-2"></i>
-                  Retour à l'accueil
-                </Link>
-              </div>
+               <div className="mt-16 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl p-8 text-center border border-yellow-200">
+                 <h3 className="text-2xl lg:text-3xl font-bold text-dark mb-4">Retour à l'accueil</h3>
+                 <p className="text-gray-700 leading-relaxed mb-6">
+                   Découvrez nos offres d'assurance professionnelle et obtenez votre devis personnalisé en quelques clics.
+                 </p>
+                 <Link to="/" className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-2xl hover:shadow-lg transition-all transform hover:scale-105 gradient-shine">
+                   <i className="fas fa-arrow-left mr-2"></i>
+                   Retour à l'accueil
+                 </Link>
+               </div>
             </div>
           </div>
         </div>

@@ -129,16 +129,16 @@ function Hero({ onSuccess }) {
                   <div className="w-16 h-16 bg-yellow-400 rounded-2xl mx-auto mb-4 flex items-center justify-center">
                     <i className="fas fa-calculator text-2xl text-dark"></i>
                   </div>
-                  <h2 className="text-3xl font-bold text-gradient mb-4">Complétez ce formulaire pour obtenir un tarif</h2>
+                  <h2 className="text-3xl lg:text-4xl font-bold text-gradient mb-4">Complétez ce formulaire pour obtenir un tarif</h2>
                   <div className="w-20 h-1 bg-yellow-400 mx-auto rounded-full"></div>
                 </div>
 
                 <form id="contactForm" onSubmit={handleSubmit} className="space-y-6">
-                    {error && (
-                      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                        {error}
-                      </div>
-                    )}
+                     {error && (
+                       <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-2xl">
+                         {error}
+                       </div>
+                     )}
 
                     <div className="space-y-6">
                       {/* Always required fields */}
@@ -342,11 +342,11 @@ function Hero({ onSuccess }) {
                         </span>
                       </div>
 
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="btn-modern w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl pulse-animation"
-                      >
+                        <button
+                          type="submit"
+                          disabled={loading}
+                          className="btn-modern w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-2xl pulse-animation gradient-shine"
+                        >
                         {loading ? (
                           <>
                             <i className="fas fa-spinner fa-spin mr-2"></i>Traitement en cours...

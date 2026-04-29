@@ -37,9 +37,9 @@ const Response = () => {
             Votre demande a été envoyée. Un expert vous contactera rapidement.
           </p>
           <div className="mt-10">
-            <a href="/" className="btn-modern inline-flex items-center bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-3 px-6 rounded-xl hover:opacity-90 transition-all duration-300">
-              <i className="fas fa-home mr-2"></i> Retour à l'accueil
-            </a>
+             <a href="/" className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-2xl hover:shadow-lg transition-all transform hover:scale-105 gradient-shine">
+               <i className="fas fa-home mr-2"></i> Retour à l'accueil
+             </a>
           </div>
         </div>
       </div>

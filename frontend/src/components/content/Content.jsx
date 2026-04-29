@@ -95,11 +95,11 @@ const Content = ({ content = {} }) => {
           })}
         </div>
 
-      {ctaText && (
+       {ctaText && (
   <div className="text-center mt-16 reveal">
     <a
       href={ctaLink}
-      className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all transform hover:scale-105 gradient-shine"
+      className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-2xl hover:shadow-lg transition-all transform hover:scale-105 gradient-shine"
     >
       {ctaText}
     </a>
