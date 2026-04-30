@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || 'http://ecennale-electricien-backend.ddev.site/api';
+const API_URL = process.env.REACT_APP_API_URL || 'https://www.test.peri-enligne.fr/api';
 
 export const submitQuote = async (formData) => {
   try {
