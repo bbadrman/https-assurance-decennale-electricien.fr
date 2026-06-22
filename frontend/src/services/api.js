@@ -1,8 +1,19 @@
-const API_URL = process.env.REACT_APP_API_URL || 'https://www.assurance-decennale-electricien.fr/api';
+const API_URL = 'https://aksam.azurewebsites.net/api';
+const LOCAL_API_URL = 'https://ecennale-electricien-backend.ddev.site';
 
 export const submitQuote = async (formData) => {
   try {
-    const response = await fetch(`${API_URL}/leads`, {
+    // Send to external API (don't fail if external is down)
+    fetch(`${API_URL}/prospects`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    }).catch(() => null);
+
+    // Send to local API (primary - saves to your local database)
+    const localResponse = await fetch(`${LOCAL_API_URL}/api/leads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -10,10 +21,10 @@ export const submitQuote = async (formData) => {
       body: JSON.stringify(formData),
     });
 
-    if (!response.ok) {
+    if (!localResponse.ok) {
       let errorMessage = 'Erreur lors de l\'envoi du formulaire';
       try {
-        const errorData = await response.json();
+        const errorData = await localResponse.json();
         if (errorData.errors && Array.isArray(errorData.errors)) {
           errorMessage = errorData.errors.join(', ');
         } else if (errorData.message) {
@@ -25,7 +36,7 @@ export const submitQuote = async (formData) => {
       throw new Error(errorMessage);
     }
 
-    return await response.json();
+    return await localResponse.json();
   } catch (error) {
     console.error('Error submitting quote:', error);
     throw error;
