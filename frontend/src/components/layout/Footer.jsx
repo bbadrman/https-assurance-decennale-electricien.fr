@@ -40,7 +40,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-dark/20 mt-8 pt-8 text-center text-dark">
-          <p>© 2018 Aksam Assurance. Tous droits réservés.</p>
+          <p>© 2026 Aksam Assurance. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

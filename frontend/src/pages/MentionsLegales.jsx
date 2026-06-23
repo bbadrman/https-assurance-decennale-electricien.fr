@@ -54,7 +54,7 @@ function MentionsLegales() {
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-dark mb-6">Éditeur</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Le site www.assurance-pour-vtc.fr est édité par la société <strong>AKSAM ASSURANCES SARL AU</strong> au capital de 10.000 €
+                  Le site www.assurance-decennale-electricien.fr est édité par la société <strong>AKSAM ASSURANCES SARL AU</strong> au capital de 10.000 €
                 </p>
                 <div className="mt-4 p-4 sm:p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl border border-yellow-200">
                   <ul className="space-y-1 text-sm text-gray-700">
