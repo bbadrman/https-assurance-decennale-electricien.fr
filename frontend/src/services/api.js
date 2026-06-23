@@ -1,19 +1,8 @@
-const API_URL = 'https://aksam.azurewebsites.net/api';
-const LOCAL_API_URL = 'https://ecennale-electricien-backend.ddev.site';
+const API_URL = 'https://assurance-decennale-electricien.fr';
 
 export const submitQuote = async (formData) => {
   try {
-    // Send to external API (don't fail if external is down)
-    fetch(`${API_URL}/prospects`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    }).catch(() => null);
-
-    // Send to local API (primary - saves to your local database)
-    const localResponse = await fetch(`${LOCAL_API_URL}/api/leads`, {
+    const localResponse = await fetch(`${API_URL}/api/leads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

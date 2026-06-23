@@ -4,7 +4,7 @@ nelmio_cors:
         allow_origin:
             - '^https?://(www\.)?assurance-decennale-electricien\.fr$'
             - '^https?://localhost(:[0-9]+)?$'
-            - '^https?://ecennale-electricien\.ddev\.site(:[0-9]+)?$'
+            - '^https?://decennale-electricien\.ddev\.site(:[0-9]+)?$'
         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
         allow_headers: ['Content-Type', 'Authorization']
         expose_headers: ['Link']

