@@ -11,7 +11,7 @@ const Header = () => {
                  <i className="fas fa-shield-alt text-2xl text-dark"></i>
                </div>
               
-                 <h1 className="text-lg font-semibold text-dark">Assurance Décennale Électricien</h1>
+                 <span className="text-lg font-semibold text-dark">Assurance Décennale Électricien</span>
                  <p className="text-xs text-dark/80">Devis en quelques clics</p>
                </div>
              </div>

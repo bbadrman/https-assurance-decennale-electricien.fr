@@ -122,6 +122,7 @@ function Hero({ onSuccess }) {
       </div>
 
         <div className="container mx-auto px-4 relative z-10">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gradient text-center mb-12">Assurance Décennale Électricien : Comparez et Souscrivez</h1>
           <div className="grid lg:grid-cols-2 gap-16 items-stretch">
            <div className="reveal order-1 lg:order-2">
               <div className="bg-surface rounded-3xl shadow-2xl p-8 card-hover border border-gray-100">
