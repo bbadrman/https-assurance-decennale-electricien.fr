@@ -167,6 +167,7 @@ function Home() {
               question: "Quelle différence entre décennale et responsabilité civile professionnelle pour un électricien ?",
               answer: "La décennale couvre les dommages survenant après réception des travaux, pendant dix ans, lorsqu'ils compromettent la solidité ou la destination de l'ouvrage. La RCP couvre les dommages causés pendant l'exécution des travaux (avant réception) : un outil tombant sur un meuble du client, une maladresse endommageant une canalisation existante. Les deux garanties sont complémentaires et généralement souscrites conjointement."
             }
+            ,
           ]
         }}
       />
