@@ -1,0 +1,7 @@
+# Routing configuration
+# See https://symfony.com/doc/current/routing.html
+
+# The default URI is used for generating URLs in non-HTTP contexts (CLI, etc.)
+framework:
+    router:
+        default_uri: '%env(DEFAULT_URI)%'

@@ -1,0 +1,187 @@
+<section id="hero" class="py-20 lg:py-32 bg-gradient-to-br from-light via-surfaceHover to-light hero-pattern relative overflow-hidden">
+    <div class="absolute inset-0 scanlines-bg opacity-30"></div>
+
+    <div class="bg-orb w-96 h-96 bg-yellow-300 top-20 left-10 transition-all duration-1000 opacity-30 translate-y-0" style="animation-delay: 0s"></div>
+    <div class="bg-orb w-80 h-80 bg-blue-300 bottom-20 right-10 transition-all duration-1000 delay-300 opacity-25 translate-y-0" style="animation-delay: -5s"></div>
+    <div class="bg-orb w-60 h-60 bg-green-300 top-1/2 left-1/3 transition-all duration-1000 delay-500 opacity-20 translate-y-0" style="animation-delay: -10s"></div>
+
+    <div class="absolute top-10 left-10 transition-all duration-1000 delay-200 opacity-30">
+        <div class="w-16 h-16 bg-yellow-400 rounded-2xl shadow-lg flex items-center justify-center floating-animation">
+            <i class="fas fa-shield-alt text-yellow-600 text-2xl"></i>
+        </div>
+    </div>
+    <div class="absolute top-20 right-20 transition-all duration-1000 delay-400 opacity-25" style="animation-delay: -2s">
+        <div class="w-20 h-20 bg-blue-400 rounded-full shadow-lg flex items-center justify-center floating-animation">
+            <i class="fas fa-bolt text-blue-500 text-2xl"></i>
+        </div>
+    </div>
+    <div class="absolute bottom-10 left-1/4 transition-all duration-1000 delay-600 opacity-20" style="animation-delay: -4s">
+        <div class="w-12 h-12 bg-green-400 rounded-lg shadow-lg flex items-center justify-center floating-animation">
+            <i class="fas fa-plug text-green-500 text-lg"></i>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-stretch">
+            <div class="reveal order-1 lg:order-2">
+                <div class="bg-surface rounded-3xl shadow-2xl p-8 card-hover border border-gray-100">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-yellow-400 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                            <i class="fas fa-calculator text-2xl text-dark"></i>
+                        </div>
+                        <h2 class="text-3xl lg:text-4xl font-bold text-gradient mb-4">Complétez ce formulaire pour obtenir un tarif</h2>
+                        <div class="w-20 h-1 bg-yellow-400 mx-auto rounded-full"></div>
+                    </div>
+
+                    {{ form_start(form, {'attr': {'id': 'contactForm', 'class': 'space-y-6'}}) }}
+                        {% if form_errors(form) %}
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-2xl">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
+
+                        <div class="space-y-6">
+                            <div class="form-group">
+                                <div class="input-group flex">
+                                    <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                        <i class="fas fa-user text-yellow-500"></i>
+                                    </span>
+                                    {{ form_widget(form.nom, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input', 'placeholder': 'Nom...'}}) }}
+                                </div>
+                                {{ form_errors(form.nom) }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group flex">
+                                    <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                        <i class="fas fa-user-tag text-yellow-500"></i>
+                                    </span>
+                                    {{ form_widget(form.prenom, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input', 'placeholder': 'Prénom...'}}) }}
+                                </div>
+                                {{ form_errors(form.prenom) }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group flex">
+                                    <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                        <i class="fas fa-building text-yellow-500"></i>
+                                    </span>
+                                    {{ form_widget(form.raisonSociale, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input', 'placeholder': 'Raison sociale...'}}) }}
+                                </div>
+                                {{ form_errors(form.raisonSociale) }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group flex">
+                                    <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                        <i class="fas fa-calendar-check text-yellow-500"></i>
+                                    </span>
+                                    {{ form_widget(form.demarrageActivite, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input'}}) }}
+                                </div>
+                                {{ form_errors(form.demarrageActivite) }}
+                            </div>
+
+                            <div id="insurance-history-fields">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <div class="input-group flex">
+                                            <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                                <i class="fas fa-shield-alt text-yellow-500"></i>
+                                            </span>
+                                            {{ form_widget(form.activiteAssuree, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input'}}) }}
+                                        </div>
+                                        {{ form_errors(form.activiteAssuree) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group flex">
+                                            <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                                <i class="fas fa-ban text-yellow-500"></i>
+                                            </span>
+                                            {{ form_widget(form.assuranceResilie, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input'}}) }}
+                                        </div>
+                                        {{ form_errors(form.assuranceResilie) }}
+                                    </div>
+                                </div>
+
+                                <div id="motif-resiliation-field">
+                                    <div class="input-group flex">
+                                        <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                                        </span>
+                                        {{ form_widget(form.motifResiliation, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input'}}) }}
+                                    </div>
+                                    {{ form_errors(form.motifResiliation) }}
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <div class="input-group flex">
+                                        <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                            <i class="fas fa-map-marker-alt text-yellow-500"></i>
+                                        </span>
+                                        {{ form_widget(form.codePostal, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input', 'placeholder': 'Code Postal...'}}) }}
+                                    </div>
+                                    {{ form_errors(form.codePostal) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group flex">
+                                        <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                            <i class="fas fa-envelope text-yellow-500"></i>
+                                        </span>
+                                        {{ form_widget(form.email, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input', 'placeholder': 'Email...'}}) }}
+                                    </div>
+                                    {{ form_errors(form.email) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group flex">
+                                    <span class="inline-flex items-center px-3 py-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-xl text-gray-600">
+                                        <i class="fas fa-phone text-yellow-500"></i>
+                                    </span>
+                                    {{ form_widget(form.tele, {'attr': {'class': 'flex-1 min-w-0 px-4 py-4 border border-gray-200 rounded-r-xl bg-light focus:bg-surface transition-all duration-300 form-input', 'placeholder': 'Téléphone...'}}) }}
+                                </div>
+                                {{ form_errors(form.tele) }}
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-6 bg-yellow-50 rounded-2xl border border-yellow-200">
+                                <input type="checkbox" checked class="mt-1 w-5 h-5 text-yellow-500 rounded focus:ring-2 focus:ring-yellow-500 border-2 border-yellow-300" />
+                                <span class="text-sm text-gray-600 leading-relaxed">
+                                    En cliquant sur 'Comparer', vous acceptez de transmettre vos informations à AKSAM ASSURANCES, qui accepte de les utiliser conformément à sa politique de confidentialité dans le but de vous fournir des propositions de devis d'assurances adapté à votre recherche
+                                </span>
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn-modern w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-8 rounded-2xl pulse-animation gradient-shine"
+                            >
+                                <i class="fas fa-calculator mr-2"></i>Comparer maintenant
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            
+            <div class="reveal order-2 lg:order-1 lg:flex-1">
+                <div class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl shadow-2xl overflow-hidden h-full min-h-[600px] relative group">
+
+                    <div class="absolute inset-0 scanlines-bg opacity-20"></div>
+
+                    <div class="absolute -inset-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute inset-0 rounded-full border-2 border-yellow-400 glow-ring"></div>
+                        <div class="absolute inset-4 rounded-full border-2 border-yellow-300 glow-ring" style="animation-direction: reverse"></div>
+                    </div>
+
+                    <img
+                        src="{{ asset('images/img.png') }}"
+                        alt="Assurance Décennale Électricien"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

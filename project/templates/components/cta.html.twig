@@ -1,0 +1,18 @@
+<section class="py-20 bg-gradient-to-r from-yellow-400 to-yellow-500 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-30"></div>
+    
+    <div class="container mx-auto px-4 text-center relative z-10">
+        <div class="reveal">
+            <h2 class="text-4xl lg:text-5xl font-bold text-dark mb-4">{{ title|default('Contactez-nous') }}</h2>
+        </div>
+        <div class="reveal" style="animation-delay: 0.1s">
+            <p class="text-xl text-dark/80 mb-8 max-w-2xl mx-auto">{{ description|default('Une question? N\'hésitez pas à nous contacter.') }}</p>
+        </div>
+        <div class="reveal" style="animation-delay: 0.2s">
+           <a href="{{ buttonLink|default('#hero') }}" class="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-dark font-bold py-4 px-10 rounded-2xl hover:shadow-lg transition-all transform hover:scale-105 gradient-shine">
+                {{ buttonText|default('Contactez-nous') }}
+            </a>
+        </div>
+    </div>
+</section>

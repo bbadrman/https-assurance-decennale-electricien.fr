@@ -1,0 +1,123 @@
+#ddev-generated
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file. DDEV will not then
+# update it, for example if you add `additional_hostnames`, etc.
+
+http:
+  routers:
+    ecennale-electricien-backend-web-80-http:
+      entrypoints:
+        - http-80
+      rule: HostRegexp(`^ecennale-electricien-backend\.ddev\.site$`)
+      
+      service: "ecennale-electricien-backend-web-80"
+      tls: false
+      # middlewares:
+      #   - "ecennale-electricien-backend-redirectHttps"
+    ecennale-electricien-backend-web-8025-http:
+      entrypoints:
+        - http-8025
+      rule: HostRegexp(`^ecennale-electricien-backend\.ddev\.site$`)
+      
+      service: "ecennale-electricien-backend-web-8025"
+      tls: false
+      # middlewares:
+      #   - "ecennale-electricien-backend-redirectHttps"
+    ecennale-electricien-backend-xhgui-80-http:
+      entrypoints:
+        - http-8143
+      rule: HostRegexp(`^ecennale-electricien-backend\.ddev\.site$`)
+      
+      service: "ecennale-electricien-backend-xhgui-80"
+      tls: false
+      # middlewares:
+      #   - "ecennale-electricien-backend-redirectHttps"
+    ecennale-electricien-backend-phpmyadmin-80-http:
+      entrypoints:
+        - http-8036
+      rule: HostRegexp(`^ecennale-electricien-backend\.ddev\.site$`)
+      
+      service: "ecennale-electricien-backend-phpmyadmin-80"
+      tls: false
+      # middlewares:
+      #   - "ecennale-electricien-backend-redirectHttps"
+    
+    
+    
+    ecennale-electricien-backend-web-80-https:
+      entrypoints:
+        - http-443
+      rule: HostRegexp(`^ecennale-electricien-backend\.ddev\.site$`)
+      
+      service: "ecennale-electricien-backend-web-80"
+      
+      tls: true
+      
+    ecennale-electricien-backend-web-8025-https:
+      entrypoints:
+        - http-8026
+      rule: HostRegexp(`^ecennale-electricien-backend\.ddev\.site$`)
+      
+      service: "ecennale-electricien-backend-web-8025"
+      
+      tls: true
+      
+    
+    ecennale-electricien-backend-xhgui-80-https:
+      entrypoints:
+        - http-8142
+      rule: HostRegexp(`^ecennale-electricien-backend\.ddev\.site$`)
+      
+      service: "ecennale-electricien-backend-xhgui-80"
+      
+      tls: true
+      
+    
+    ecennale-electricien-backend-phpmyadmin-80-https:
+      entrypoints:
+        - http-8037
+      rule: HostRegexp(`^ecennale-electricien-backend\.ddev\.site$`)
+      
+      service: "ecennale-electricien-backend-phpmyadmin-80"
+      
+      tls: true
+      
+    
+
+  middlewares:
+    ecennale-electricien-backend-redirectHttps:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+  services:
+    ecennale-electricien-backend-web-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-ecennale-electricien-backend-web:80
+        
+    ecennale-electricien-backend-web-8025:
+      loadbalancer:
+        servers:
+          - url: http://ddev-ecennale-electricien-backend-web:8025
+        
+    
+    
+    ecennale-electricien-backend-xhgui-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-ecennale-electricien-backend-xhgui:80
+        
+    
+    ecennale-electricien-backend-phpmyadmin-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-ecennale-electricien-backend-phpmyadmin:80
+        
+    
+    
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/ecennale-electricien-backend.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/ecennale-electricien-backend.key

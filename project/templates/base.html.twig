@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Assurance Décennale Électricien{% endblock %}</title>
+        <meta name="description" content="{% block meta_description %}Assurance décennale électricien : comparez les garanties, obtenez un tarif adapté à votre activité et protégez vos chantiers.{% endblock %}">
+        <link rel="canonical" href="{% block canonical %}{{ app.request.schemeAndHttpHost() }}{% endblock %}">
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
+        
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#1E3A8A',
+                            secondary: '#38BDF8',
+                            accent: '#F59E0B',
+                            success: '#10B981',
+                            warning: '#FB923C',
+                            danger: '#EF4444',
+                            dark: '#0F172A',
+                            light: '#F8FAFC',
+                            surface: '#FFFFFF',
+                            surfaceHover: '#F1F5F9',
+                        },
+                        fontFamily: {
+                            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body class="font-sans bg-light">
+        {% include 'components/header.html.twig' %}
+        
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+        
+        {% include 'components/footer.html.twig' %}
+        {% include 'components/cookie_banner.html.twig' %}
+        
+        <script src="{{ asset('js/main.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

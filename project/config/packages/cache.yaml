@@ -1,0 +1,11 @@
+# This file is the entry point to configure cache
+
+# To use Redis for cache:
+# framework:
+#     cache:
+#         default_memcached_provider: 'memcached://localhost'
+
+# To use APCu for cache:
+# framework:
+#     cache:
+#         app: cache.adapter.apcu
