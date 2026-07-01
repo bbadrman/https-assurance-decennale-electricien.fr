@@ -1,4 +1,0 @@
-# Import controller routes
-controllers:
-    resource: ../src/Controller/
-    type: attribute
