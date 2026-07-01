@@ -4,10 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Assurance Décennale Électricien{% endblock %}</title>
-        <meta name="description" content="{% block meta_description %}Assurance décennale électricien : comparez les garanties, obtenez un tarif adapté à votre activité et protégez vos chantiers.{% endblock %}">
+        <meta name="description" content="{% block meta_description %}Assurance décennale électricien : comparez les garanties, obtenez un tarif adapté à votre activité et protégez vos chantiers. Nos experts vous accompagnent.{% endblock %}">
+         <meta name="keywords" content="{% block meta_keywords %}assurance décennale électricien.{% endblock %}">
+        <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
         <link rel="canonical" href="{% block canonical %}{{ app.request.schemeAndHttpHost() }}{% endblock %}">
-        <link rel="icon" href="{{ asset('favicon.ico') }}">
-        
+        <link rel="icon" href="{{ asset('favicon.png') }}">
+
+        <meta property="og:title" content="{% block og_title %}Assurance Décennale Électricien | Devis en Ligne{% endblock %}">
+        <meta property="og:description" content="{% block og_description %}Obtenez une assurance décennale électricien adaptée à votre activité. Garanties, tarifs et conseils par nos experts en assurance professionnelle.{% endblock %}">
+        <meta property="og:url" content="{% block og_url %}https://www.assurance-decennale-electricien.fr/{% endblock %}">
+        <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+        <meta property="og:image" content="{% block og_image %}https://www.assurance-decennale-electricien.fr/images/assurance-decennale-electricien.jpg{% endblock %}">
+
+        {% block schema %}{% endblock %}
+
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script src="https://cdn.tailwindcss.com"></script>
         <script>

@@ -5,9 +5,15 @@
     <div class="container mx-auto px-4">
 
         {% if title is defined and title %}
-            <h2 class="text-3xl lg:text-4xl font-bold text-dark text-center mb-8 reveal">
-                {{ title }}
-            </h2>
+            {% if isH1 is defined and isH1 %}
+                <h1 class="text-3xl lg:text-4xl font-bold text-dark text-center mb-8 reveal">
+                    {{ title }}
+                </h1>
+            {% else %}
+                <h2 class="text-3xl lg:text-4xl font-bold text-dark text-center mb-8 reveal">
+                    {{ title }}
+                </h2>
+            {% endif %}
         {% endif %}
 
         {% if introduction is defined and introduction %}
